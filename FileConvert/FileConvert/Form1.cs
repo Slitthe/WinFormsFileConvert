@@ -26,7 +26,6 @@ namespace FileConvert
         {
             var senderCast = (OpenFileDialog)sender;
             
-            FileProcessor.TextFileToJson(senderCast.FileName, senderCast.SafeFileName);
             filePathText.Text = senderCast.FileName;
 
 

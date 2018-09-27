@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConvert", "FileConvert\FileConvert.csproj", "{76A5B81E-7335-45A3-B19A-DC8FCC901A2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessorUnit.Tests", "FileProcessorUnit.Tests\FileProcessorUnit.Tests.csproj", "{EEDF91FB-C66C-4958-88D6-52AEFC6E730D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{76A5B81E-7335-45A3-B19A-DC8FCC901A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76A5B81E-7335-45A3-B19A-DC8FCC901A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76A5B81E-7335-45A3-B19A-DC8FCC901A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDF91FB-C66C-4958-88D6-52AEFC6E730D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDF91FB-C66C-4958-88D6-52AEFC6E730D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDF91FB-C66C-4958-88D6-52AEFC6E730D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDF91FB-C66C-4958-88D6-52AEFC6E730D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

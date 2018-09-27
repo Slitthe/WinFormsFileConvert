@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace FileConvert.DTOs
 {
-    class TextToJsonModel
+    public class FileDTO
     {
+        public string FileExtension { get; set; }
         public string FileName { get; set; }
-        public string Content { get; set; }
+        public byte[] Content { get; set; }
+        
     }
 }
