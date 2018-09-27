@@ -11,6 +11,5 @@ namespace FileConvert.DTOs
         public string FileExtension { get; set; }
         public string FileName { get; set; }
         public byte[] Content { get; set; }
-        
     }
 }

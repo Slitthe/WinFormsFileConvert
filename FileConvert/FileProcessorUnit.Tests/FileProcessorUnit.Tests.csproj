@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileProcessorTests\GetFileNameOnlyFromPath.Tests.cs" />
+    <Compile Include="FileProcessorTests\FilePathsToFileDtos.Tests.cs" />
     <Compile Include="FileProcessorTests\GetFullFileNameFromPath.Tests.cs" />
     <Compile Include="FileProcessorTests\GetFileExtensionCheck.Tests.cs" />
     <Compile Include="FileProcessorTests\CheckMultipleFilesExistance.Tests.cs" />

@@ -103,12 +103,13 @@ namespace FileConvert
         // maybe move this to an extenal class/file
         // bytes[] -> file convert || example byte[] (.zip) to actual .zip file which is savable on the disk
 
-        private static FileDTO filePathsToFileDTO(string fullFilePath)
+        public static FileDTO filePathsToFileDTO(string fullFilePath)
         {
             var fileExists = filesExistanceChecker(fullFilePath);
-            var fileDto = new FileDTO();
+            FileDTO fileDto = null;
             if(fileExists)
             {
+                fileDto = new FileDTO();
                 fileDto.Content = File.ReadAllBytes(fullFilePath);
                 fileDto.FileExtension = getFileExtension(fullFilePath);
                 fileDto.FileName = getFileName(fullFilePath);
