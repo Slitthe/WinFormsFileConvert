@@ -13,17 +13,21 @@ namespace FileConvert.Services
         {
             List<FileDTO> convertedFiles = new List<FileDTO>();
 
-            foreach(FileToConvert file in files)
+            for(int i = 0; i < files.Count; i++)
             {
-                switch (file.ConvertMode)
+                FileDTO fileToAdd = files[i].file;
+
+                switch (files[i].ConvertMode)
                 {
                     case Enums.ConvertType.Json:
-                        //file = // converted file;
+                        fileToAdd = FileProcessor.TextFileToJson(fileToAdd);
                         break;
                     case Enums.ConvertType.Binary:
-                        //file = // converted file;
+                        fileToAdd = FileProcessor.TextToBinary(fileToAdd);
                         break;
                 }
+
+                convertedFiles.Add(files[i].file);
             }
 
             return null;

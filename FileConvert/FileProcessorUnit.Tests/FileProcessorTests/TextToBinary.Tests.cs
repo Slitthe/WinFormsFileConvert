@@ -4,6 +4,7 @@ using FileConvert;
 using FileConvert.DTOs;
 using System.Text;
 using System.IO;
+using System.Collections;
 
 namespace FileProcessorUnit.Tests
 {
@@ -45,6 +46,36 @@ namespace FileProcessorUnit.Tests
 
             // Assert
             Assert.AreEqual(expectedString, resultString);
+
+        }
+
+        [TestMethod]
+        public void WithNonTextFormat()
+        {
+
+            // Test data
+            string file1Extension = "pdf";
+            string file1Name = "unitTestExample1";
+            string expectedString = "I am a string and nothing more";
+
+            byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(expectedString);
+            FileDTO file1Dto = new FileDTO()
+            {
+                FileName = file1Name,
+                FileExtension = file1Extension,
+                Content = file1AsArrayOfBytes
+            };
+
+            // Convert
+            FileDTO fileAsBinary = FileProcessor.TextToBinary(file1Dto);
+
+
+            // Assert
+            Assert.AreEqual(
+                fileAsBinary.FileExtension == file1Dto.FileExtension &&
+                fileAsBinary.FileName == file1Dto.FileName &&
+                StructuralComparisons.StructuralEqualityComparer.Equals(file1Dto.Content, fileAsBinary.Content)
+                , true);
 
         }
 

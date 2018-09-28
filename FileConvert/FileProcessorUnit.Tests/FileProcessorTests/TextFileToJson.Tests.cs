@@ -46,11 +46,51 @@ namespace FileProcessorUnit.Tests
 
 
 
+
+
+
+
             Assert.AreEqual(
                 file1AsJsonToString == fileAsJsonDToConverted,
                 true);
 
 
         }
+
+        [TestMethod]
+        public void WithNonTextFileExtension()
+        {
+            // create file object
+            string file1Extension = "json";
+            string file1Name = "unitTestExample1";
+            string file1AsString = "I am a string and nothing more";
+            byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(file1AsString);
+
+            FileDTO file1Dto = new FileDTO()
+            {
+                FileName = file1Name,
+                FileExtension = file1Extension,
+                Content = file1AsArrayOfBytes
+            };
+
+
+            // convert object to json
+            FileDTO file1AsJson = FileProcessor.TextFileToJson(file1Dto);
+
+
+
+
+            // Assert
+            Assert.AreEqual(
+                file1AsJson.FileExtension == file1Dto.FileExtension &&
+                file1AsJson.FileName == file1Dto.FileName &&
+                StructuralComparisons.StructuralEqualityComparer.Equals(file1Dto.Content, file1AsJson.Content)
+                , true);
+
+
+        }
+
+
+
     }
 }
