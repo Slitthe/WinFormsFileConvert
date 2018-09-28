@@ -18,65 +18,78 @@ namespace FileConvert
         /// <summary>
         /// .txt -> .json convertor (as byte[])
         /// </summary>
-        //public static byte[] TextFileToJson(string fullFilePath, string )
-        //{
-        //    if(checkFileExtension(fileName, "txt"))
-        //    {
-        //        string toJsonText = "";
+        public static FileDTO TextFileToJson(FileDTO file)
+        {
+            if (file.FileExtension == "txt")
+            {
+                string fileContentAsString = Encoding.Default.GetString(file.Content);
 
-        //        FileDTO jsonObject = new FileDTO() { }
-        //        jsonObject.FileName = fileName;
+                TextFileAsJsonDTO objectForJsonSerializer = new TextFileAsJsonDTO()
+                {
+                    FileName = file.FileName,
+                    FileExtension = file.FileExtension,
+                    Content = fileContentAsString
+                };
 
-        //        string fileContent = File.ReadAllText(fullFilePath);
-        //        jsonObject.Content = fileContent;
+                string fileAsJson = JsonConvert.SerializeObject(objectForJsonSerializer);
 
-        //        toJsonText = JsonConvert.SerializeObject(jsonObject);
+                byte[] jsonFileAsBytesArray = Encoding.Default.GetBytes(fileAsJson);
 
-        //        return Encoding.Default.GetBytes(toJsonText);
-        //    }
 
-        //    throw new ArgumentException("File is invalid format, only .txt accepted");
-            
-        //}
-        
+                FileDTO convertedFileDto = new FileDTO()
+                {
+                    FileName = file.FileName,
+                    FileExtension = "json",
+                    Content = jsonFileAsBytesArray
+                };
+
+                return convertedFileDto;
+                
+            }
+            else
+            {
+                throw new ArgumentException("File is invalid format, only .txt accepted");
+            }
+        }
+
         /// <summary>
         /// files -> .zip (as bytes array)
         /// </summary>
-        //public static byte[] FilePathsToZipBytesArray(IList<FileDTO> files)
-        //{
-        //    if (files.Count > 0)
-        //    {
-        //        byte[] zipFileBytes;
-        //        var zipFile = new MemoryStream();
-        //        // create/open archive
+        public static byte[] FileDtoListToZip(IList<FileDTO> files)
+        {
+            if (files.Count > 0)
+            {
+                byte[] zipFileBytes;
+                var zipFile = new MemoryStream();
+                // create/open archive
 
-        //        using (ZipArchive archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
-        //        {
-        //            foreach(FileDTO file in files)
-        //            {
-        //                // add each file to archive
-        //                string fileName = file.FileName + file.FileExtension;
-        //                var curentEntry = archive.CreateEntry(fileName);
+                using (ZipArchive archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
+                {
+                    foreach (FileDTO file in files)
+                    {
+                        // add each file to archive
+                        string fileName = file.FileName + '.' + file.FileExtension;
+                        var curentEntry = archive.CreateEntry(fileName);
 
-        //                using( var openedEntry = curentEntry.Open() )
-        //                {
-        //                    openedEntry.Write(file.Content, 0, file.Content.Length);
-        //                }
-                        
-        //            }
+                        using (var openedEntry = curentEntry.Open())
+                        {
+                            openedEntry.Write(file.Content, 0, file.Content.Length);
+                        }
 
-        //            // get archive as bytes
-        //            zipFileBytes = zipFile.ToArray();
-        //        }
+                    }
 
-        //        return zipFileBytes;
-        //    }
-        //    else
-        //    {
-        //        throw new FileNotFoundException("One or more of the inputs file couldn't be found");
-        //    }
+                    // get archive as bytes
+                    zipFileBytes = zipFile.ToArray();
+                }
 
-        //}
+                return zipFileBytes;
+            }
+            else
+            {
+                throw new FileNotFoundException("One or more of the inputs file couldn't be found");
+            }
+
+        }
 
         /// <summary>
         /// .txt -> binary data (as bytes array)
@@ -103,6 +116,32 @@ namespace FileConvert
         // maybe move this to an extenal class/file
         // bytes[] -> file convert || example byte[] (.zip) to actual .zip file which is savable on the disk
 
+
+
+
+
+        public static void SaveFilesAsZip(IList<FileDTO> files, string outputDirectory, string zipName)
+        {
+            byte[] fileZip = FileDtoListToZip(files);
+
+            string fullPath = $"{outputDirectory}\\{zipName}.zip";
+
+            File.WriteAllBytes(fullPath, fileZip);
+        }
+
+        public static void SaveFiles(IList<FileDTO> files, string outputDirectoryPath)
+        {
+
+            foreach (var file in files)
+            {
+                if( file != null )
+                {
+                    string fullPath = $"{outputDirectoryPath}\\{file.FileName}.{file.FileExtension}";
+                    File.WriteAllBytes(fullPath, file.Content);
+                }
+            }
+        }
+
         public static FileDTO filePathsToFileDTO(string fullFilePath)
         {
             var fileExists = filesExistanceChecker(fullFilePath);
@@ -117,30 +156,6 @@ namespace FileConvert
             }
             return fileDto;
         }
-
-
-
-        public static void SaveFiles(IList<FileDTO> files, string outputDirectoryPath)
-        {
-
-            foreach (var file in files)
-            {
-                string fullPath = $"{outputDirectoryPath}\\{file.FileName}.{file.FileExtension}";
-                File.WriteAllBytes(fullPath, file.Content);
-            }
-        }
-
-        //public static void SaveFilesAsZip(IList<FileDTO> files, string outputDirectory)
-        //{
-        //    foreach (var file in files)
-        //    {
-        //        string fullPath = $"{outputDirectory}\\{file.FileName}.{file.FileExtension}";
-
-        //        File.WriteAllBytes(fullPath, file.Content);
-        //    }
-        //}
-
-
         #endregion
 
         #region Helpers

@@ -9,7 +9,7 @@ namespace FileProcessorUnit.Tests
     public class CheckFileExtension
     {
         [TestMethod]
-        public void CheckFileExtensionsWithCorrectValues()
+        public void WithCorrectValues()
         {
             string fileName = "something.not.actualExtension";
             string fileExtension = "actualExtension";
@@ -20,7 +20,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void CheckFileExtensionWithWrongFileExtension()
+        public void WithWrongFileExtension()
         {
             string fileName = "something.not.actualExtension";
             string fileExtension = "actualExtesion";
@@ -31,7 +31,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void CheckFileExtensionWithNoExtensionFile()
+        public void WithNoExtensionFile()
         {
             string fileName = "somethingnotactualExtension";
             string fileExtension = "actualExtension";

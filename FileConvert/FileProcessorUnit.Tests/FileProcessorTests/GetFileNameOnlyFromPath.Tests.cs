@@ -9,7 +9,7 @@ namespace FileProcessorUnit.Tests
     public class GetFileNameOnlyFromPath
     {
         [TestMethod]
-        public void GetFullFileNameFromPath_WithSimplePath()
+        public void WithSimplePath()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
 
@@ -22,7 +22,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void GetFullFileNameFromPath_WithFileNameContainingMoreDotCharacters()
+        public void WithFileNameContainingMoreThanOneDotCharacters()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.antoher.html";
 
@@ -35,7 +35,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void GetFullFileNameFromPath_WithNoFileInPath()
+        public void WithNoFileInPath()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\";
 

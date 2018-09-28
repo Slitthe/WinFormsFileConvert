@@ -11,7 +11,7 @@ namespace FileProcessorUnit.Tests
     public class FilePathsToFileDTOs
     {
         [TestMethod]
-        public void ConvertFilePathsToFileDTOs_WithValidData()
+        public void WithValidData()
         {
             var file1FullPath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt";
             byte[] file1Bytes = File.ReadAllBytes(file1FullPath);
@@ -35,7 +35,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void ConvertFilePathsToFileDTOs_WithInvalidPath()
+        public void WithInvalidPath()
         {
             var file1CorrectFullPath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt";
             var file1WrongFullPath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\filne.txt";
@@ -54,15 +54,6 @@ namespace FileProcessorUnit.Tests
         }
 
 
-        //    string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
-
-
-        //    string result =  FileConvertors.getFullFileName(fullFilePath);
-
-        //    string expected = "fileTwo.html";
-
-        //    Assert.AreEqual(expected, result);
-        //}
     }
     
 }

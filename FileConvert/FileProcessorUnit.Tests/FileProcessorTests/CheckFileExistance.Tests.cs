@@ -9,7 +9,7 @@ namespace FileProcessorUnit.Tests
     public class CheckFileExistance
     {
         [TestMethod]
-        public void CheckFileExistanceWithCorrectFile()
+        public void WithCorrectFile()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
 
@@ -25,7 +25,7 @@ namespace FileProcessorUnit.Tests
 
 
         [TestMethod]
-        public void CheckFileExistanceWithIncorrectFile()
+        public void WithAFileWhichDoesNotExist()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\thisDoesNotExist.html";
 
@@ -40,24 +40,9 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void CheckFileExistanceWithWrongPath()
+        public void WithWrongPath()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\asdsadsa\sadas.txt";
-
-
-            bool result = FileConvertors.filesExistanceChecker(fullFilePath);
-
-            bool expectedResult = false;
-
-
-
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
-        public void CheckFileExistanceInvalidPath()
-        {
-            string fullFilePath = @"asfjasuaj09a78sd7as0d89";
 
 
             bool result = FileConvertors.filesExistanceChecker(fullFilePath);

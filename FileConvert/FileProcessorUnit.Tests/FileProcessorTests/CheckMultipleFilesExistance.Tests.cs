@@ -10,7 +10,7 @@ namespace FileProcessorUnit.Tests
     public class CheckMultipleFilesExistance
     {
         [TestMethod]
-        public void CheckMultipleFilesExistanceWithCorrectValues()
+        public void WithCorrectValues()
         {
             string fullFilePath1 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
             string fullFilePath2 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt";
@@ -29,7 +29,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void CheckMultipleFilesExistanceWithOneValuesBeingWrong()
+        public void WithOneValuesBeingWrong()
         {
             string fullFilePath1 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
             string fullFilePath2 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt";
@@ -48,7 +48,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void CheckMultipleFilesExistanceWithEmptyList()
+        public void WithEmptyList()
         {
 
 

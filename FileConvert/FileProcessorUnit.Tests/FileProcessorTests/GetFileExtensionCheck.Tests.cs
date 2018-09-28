@@ -9,7 +9,7 @@ namespace FileProcessorUnit.Tests
     public class GetFileExtension
     {
         [TestMethod]
-        public void GetFileExtensionWithSimpeFileName()
+        public void WithSimpeFileName()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
 
@@ -22,7 +22,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void GetFileExtensionWithMoreComplexFileName()
+        public void WithMoreComplexFileName()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.sometthing.else.html";
 
@@ -35,7 +35,7 @@ namespace FileProcessorUnit.Tests
         }
 
         [TestMethod]
-        public void GetFileExtensionWithNoFileInPath()
+        public void WithNoFileInPath()
         {
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\";
 
