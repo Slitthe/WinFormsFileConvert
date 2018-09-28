@@ -6,7 +6,7 @@ using FileConvert.DTOs;
 namespace FileProcessorUnit.Tests
 {
     [TestClass]
-    public class GetFullFileNameFromPath
+    public class GetFullFileName
     {
         [TestMethod]
         public void WithSimplePathAndFileName()

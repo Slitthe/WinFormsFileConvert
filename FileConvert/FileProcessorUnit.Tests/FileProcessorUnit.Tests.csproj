@@ -55,12 +55,11 @@
   <ItemGroup>
     <Compile Include="FileProcessorTests\TextToBinary.Tests.cs" />
     <Compile Include="FileProcessorTests\SaveFilesAsZip.Tests.cs" />
+    <Compile Include="FileProcessorTests\TextFileToJson.Tests.cs" />
     <Compile Include="FileProcessorTests\SaveFiles.Tests.cs" />
-    <Compile Include="FileProcessorTests\TextFileToJsonConvert.Tests.cs" />
-    <Compile Include="FileProcessorTests\SaveFilesToDirectory.Tests.cs" />
-    <Compile Include="FileProcessorTests\GetFileNameOnlyFromPath.Tests.cs" />
-    <Compile Include="FileProcessorTests\FilePathsToFileDtos.Tests.cs" />
-    <Compile Include="FileProcessorTests\GetFullFileNameFromPath.Tests.cs" />
+    <Compile Include="FileProcessorTests\GetFileName.Tests.cs" />
+    <Compile Include="FileProcessorTests\FilePathsToFileDTO.Tests.cs" />
+    <Compile Include="FileProcessorTests\GetFullFileName.Tests.cs" />
     <Compile Include="FileProcessorTests\GetFileExtension.Tests.cs" />
     <Compile Include="FileProcessorTests\FilesExistanceChecker.Tests.cs" />
     <Compile Include="FileProcessorTests\CheckFileExtension.Tests.cs" />

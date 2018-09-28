@@ -31,7 +31,7 @@ namespace FileProcessorUnit.Tests
             string file2Extension = "txt";
             string file2Name = "unitTestExample2";
             string file2AsString = "I am a another string and nothing more";
-            byte[] file2AsArrayOfBytes = Encoding.Default.GetBytes(file1AsString);
+            byte[] file2AsArrayOfBytes = Encoding.Default.GetBytes(file2AsString);
 
             var file2Dto = new FileDTO()
             {
@@ -58,5 +58,43 @@ namespace FileProcessorUnit.Tests
             }
 
         }
+
+        [TestMethod]
+        public void WithSomeNullValuesAsDtos()
+        {
+            string outputDirectory = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\SaveFiles";
+
+
+            string file2Extension = "txt";
+            string file2Name = "singleNonNullFile";
+            string file2AsString = "I am a another string and nothing more";
+            byte[] file2AsArrayOfBytes = Encoding.Default.GetBytes(file2AsString);
+
+            var file2Dto = new FileDTO()
+            {
+                FileName = file2Name,
+                FileExtension = file2Extension,
+                Content = file2AsArrayOfBytes
+            };
+
+            List<FileDTO> dummyFilesList = new List<FileDTO>() { file2Dto, null };
+
+
+            FileProcessor.SaveFiles(dummyFilesList, outputDirectory);
+
+            var file2Info = new FileInfo(@"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\SaveFiles\" + file2Name + "." + file2Extension);
+            try
+            {
+                Assert.AreEqual(file2Info.Exists, true);
+            }
+            finally
+            {
+
+                File.Delete(@"C: \Users\silviu.gherman\Desktop\DirectoryForUnitTests\SaveFiles\" + file2Name + "." + file2Extension);
+            }
+
+
+        }
+
     }
 }

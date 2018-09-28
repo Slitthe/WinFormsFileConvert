@@ -26,6 +26,7 @@ namespace FileProcessorUnit.Tests
             Assert.AreEqual(expectedResult, result);
         }
 
+        [TestMethod]
         public void WithMultipleCorrectValues()
         {
             string fullFilePath1 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";

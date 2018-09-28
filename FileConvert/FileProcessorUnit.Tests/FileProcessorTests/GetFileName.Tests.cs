@@ -6,7 +6,7 @@ using FileConvert.DTOs;
 namespace FileProcessorUnit.Tests
 {
     [TestClass]
-    public class GetFileNameOnlyFromPath
+    public class GetFileName
     {
         [TestMethod]
         public void WithSimplePath()
@@ -14,7 +14,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
 
 
-            string result =  FileProcessor.getFileName(fullFilePath);
+            string result =  FileProcessor.GetFileName(fullFilePath);
 
             string expected = "fileTwo";
 
@@ -27,7 +27,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.antoher.html";
 
 
-            string result = FileProcessor.getFileName(fullFilePath);
+            string result = FileProcessor.GetFileName(fullFilePath);
 
             string expected = "fileTwo.antoher";
 
@@ -40,7 +40,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\";
 
 
-            string result = FileProcessor.getFileName(fullFilePath);
+            string result = FileProcessor.GetFileName(fullFilePath);
 
             string expected = "";
 

@@ -14,7 +14,6 @@ namespace FileConvert
     public static class FileProcessor
     {
         #region Convertors
-
         private static byte[] FileDtoListToZip(IList<FileDTO> files)
         {
             if (files.Count > 0)
@@ -109,7 +108,6 @@ namespace FileConvert
             return convertedFileDto;
         }
 
-
         public static void SaveFilesAsZip(IList<FileDTO> files, string outputDirectory, string zipName)
         {
             byte[] fileZip = FileDtoListToZip(files);
@@ -132,8 +130,7 @@ namespace FileConvert
             }
         }
 
-
-        public static FileDTO filePathsToFileDTO(string fullFilePath)
+        public static FileDTO FilePathsToFileDTO(string fullFilePath)
         {
             var filePathList = new List<string>() { fullFilePath };
             bool fileExists = FilesExistanceChecker(filePathList);
@@ -144,15 +141,17 @@ namespace FileConvert
                 fileDto = new FileDTO();
                 fileDto.Content = File.ReadAllBytes(fullFilePath);
                 fileDto.FileExtension = GetFileExtension(fullFilePath);
-                fileDto.FileName = getFileName(fullFilePath);
+                fileDto.FileName = GetFileName(fullFilePath);
 
             }
             return fileDto;
         }
         #endregion
 
+
+
         #region Helpers
-        public static string getFileName(string fullFilePath)
+        public static string GetFileName(string fullFilePath)
         {
             string resultString = "";
 

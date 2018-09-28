@@ -1,8 +1,5 @@
-﻿using System;
+﻿using FileConvert;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FileConvert;
-using FileConvert.DTOs;
-using System.Collections.Generic;
 
 namespace FileProcessorUnit.Tests
 {

@@ -8,16 +8,13 @@ using System.Collections;
 namespace FileProcessorUnit.Tests
 {
     [TestClass]
-    public class FilePathsToFileDTOs
+    public class FilePathsToFileDTO
     {
         [TestMethod]
         public void WithValidData()
         {
             var file1FullPath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt";
             byte[] file1Bytes = File.ReadAllBytes(file1FullPath);
-
-            //var file2FullPath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
-            //byte[] file2Bytes = File.ReadAllBytes(file2FullPath);
 
             var expected = new FileDTO()
             {
@@ -26,7 +23,7 @@ namespace FileProcessorUnit.Tests
                 FileExtension = "txt"
             };
 
-            FileDTO actual = FileProcessor.filePathsToFileDTO(file1FullPath);
+            FileDTO actual = FileProcessor.FilePathsToFileDTO(file1FullPath);
 
             Assert.AreEqual(true, StructuralComparisons.StructuralEqualityComparer.Equals(expected.Content, actual.Content));
             Assert.AreEqual(expected.FileExtension, actual.FileExtension);
@@ -37,17 +34,11 @@ namespace FileProcessorUnit.Tests
         [TestMethod]
         public void WithInvalidPath()
         {
-            var file1CorrectFullPath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt";
             var file1WrongFullPath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\filne.txt";
-
-            byte[] file1Bytes = File.ReadAllBytes(file1CorrectFullPath);
-
-            //var file2FullPath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
-            //byte[] file2Bytes = File.ReadAllBytes(file2FullPath);
 
             FileDTO expected = null;
 
-            FileDTO actual = FileProcessor.filePathsToFileDTO(file1WrongFullPath);
+            FileDTO actual = FileProcessor.FilePathsToFileDTO(file1WrongFullPath);
 
             Assert.AreEqual(expected, actual);
 
