@@ -14,6 +14,9 @@ namespace FileProcessorUnit.Tests
         [TestMethod]
         public void JustCheckingExistance()
         {
+            string outputDirectory = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\ZipTests";
+            string zipName = "zipName";
+
             string file1Extension = "txt";
             string file1Name = "unitTestExample1";
             string file1AsString = "I am a string and nothing more";
@@ -40,9 +43,30 @@ namespace FileProcessorUnit.Tests
 
             List<FileDTO> dummyFilesList = new List<FileDTO>() { file1Dto, file2Dto };
 
+            FileProcessor.SaveFilesAsZip(dummyFilesList, outputDirectory, zipName);
 
 
-            byte[] filesZipped = FileConvertors.FileDtoListToZip(dummyFilesList);
+            var openSavedFile = File.Open(outputDirectory + "\\" + zipName + ".zip", FileMode.Open);
+            ZipArchive zipArch = new ZipArchive(openSavedFile, ZipArchiveMode.Read);
+
+            var entries = zipArch.Entries;
+
+            openSavedFile.Dispose();
+            zipArch.Dispose();
+
+            try
+            {
+                Assert.AreEqual(
+                    entries[0].FullName == $"{file1Name}.{file1Extension}"
+                    &&
+                    entries[1].FullName == $"{file2Name}.{file2Extension}",
+                    true
+                );
+            }
+            finally
+            {
+                File.Delete(outputDirectory + "\\" + zipName + ".zip");
+            }
             
         }
     }

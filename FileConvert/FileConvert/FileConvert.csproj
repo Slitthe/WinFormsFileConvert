@@ -66,9 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\FileToConvert.cs" />
     <Compile Include="DTOs\TextFileAsJsonDTO.cs" />
     <Compile Include="DTOs\FileDTO.cs" />
-    <Compile Include="FileProcessor.cs" />
+    <Compile Include="Enums\ConvertType.cs" />
+    <Compile Include="Services\FileConvertors.cs" />
+    <Compile Include="Services\FileProcessor.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

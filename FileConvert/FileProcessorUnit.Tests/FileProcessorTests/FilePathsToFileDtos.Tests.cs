@@ -26,7 +26,7 @@ namespace FileProcessorUnit.Tests
                 FileExtension = "txt"
             };
 
-            FileDTO actual = FileConvertors.filePathsToFileDTO(file1FullPath);
+            FileDTO actual = FileProcessor.filePathsToFileDTO(file1FullPath);
 
             Assert.AreEqual(true, StructuralComparisons.StructuralEqualityComparer.Equals(expected.Content, actual.Content));
             Assert.AreEqual(expected.FileExtension, actual.FileExtension);
@@ -47,7 +47,7 @@ namespace FileProcessorUnit.Tests
 
             FileDTO expected = null;
 
-            FileDTO actual = FileConvertors.filePathsToFileDTO(file1WrongFullPath);
+            FileDTO actual = FileProcessor.filePathsToFileDTO(file1WrongFullPath);
 
             Assert.AreEqual(expected, actual);
 

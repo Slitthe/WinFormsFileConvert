@@ -45,21 +45,24 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileProcessorTests\TextToBinary.Tests.cs" />
     <Compile Include="FileProcessorTests\SaveFilesAsZip.Tests.cs" />
-    <Compile Include="FileProcessorTests\FileDtosToZip.Tests.cs" />
+    <Compile Include="FileProcessorTests\SaveFiles.Tests.cs" />
     <Compile Include="FileProcessorTests\TextFileToJsonConvert.Tests.cs" />
     <Compile Include="FileProcessorTests\SaveFilesToDirectory.Tests.cs" />
     <Compile Include="FileProcessorTests\GetFileNameOnlyFromPath.Tests.cs" />
     <Compile Include="FileProcessorTests\FilePathsToFileDtos.Tests.cs" />
     <Compile Include="FileProcessorTests\GetFullFileNameFromPath.Tests.cs" />
-    <Compile Include="FileProcessorTests\GetFileExtensionCheck.Tests.cs" />
-    <Compile Include="FileProcessorTests\CheckMultipleFilesExistance.Tests.cs" />
-    <Compile Include="FileProcessorTests\CheckFileExistance.Tests.cs" />
+    <Compile Include="FileProcessorTests\GetFileExtension.Tests.cs" />
+    <Compile Include="FileProcessorTests\FilesExistanceChecker.Tests.cs" />
     <Compile Include="FileProcessorTests\CheckFileExtension.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

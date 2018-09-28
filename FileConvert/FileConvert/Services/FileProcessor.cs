@@ -11,51 +11,11 @@ using System.Text.RegularExpressions;
 
 namespace FileConvert
 {
-    public static class FileConvertors
+    public static class FileProcessor
     {
         #region Convertors
 
-        /// <summary>
-        /// .txt -> .json convertor (as byte[])
-        /// </summary>
-        public static FileDTO TextFileToJson(FileDTO file)
-        {
-            if (file.FileExtension == "txt")
-            {
-                string fileContentAsString = Encoding.Default.GetString(file.Content);
-
-                TextFileAsJsonDTO objectForJsonSerializer = new TextFileAsJsonDTO()
-                {
-                    FileName = file.FileName,
-                    FileExtension = file.FileExtension,
-                    Content = fileContentAsString
-                };
-
-                string fileAsJson = JsonConvert.SerializeObject(objectForJsonSerializer);
-
-                byte[] jsonFileAsBytesArray = Encoding.Default.GetBytes(fileAsJson);
-
-
-                FileDTO convertedFileDto = new FileDTO()
-                {
-                    FileName = file.FileName,
-                    FileExtension = "json",
-                    Content = jsonFileAsBytesArray
-                };
-
-                return convertedFileDto;
-                
-            }
-            else
-            {
-                throw new ArgumentException("File is invalid format, only .txt accepted");
-            }
-        }
-
-        /// <summary>
-        /// files -> .zip (as bytes array)
-        /// </summary>
-        public static byte[] FileDtoListToZip(IList<FileDTO> files)
+        private static byte[] FileDtoListToZip(IList<FileDTO> files)
         {
             if (files.Count > 0)
             {
@@ -78,6 +38,7 @@ namespace FileConvert
 
                     }
 
+                    archive.Dispose();
                     // get archive as bytes
                     zipFileBytes = zipFile.ToArray();
                 }
@@ -90,34 +51,63 @@ namespace FileConvert
             }
 
         }
+        public static FileDTO TextToBinary(FileDTO file)
+        {
+            var convertedFile = file;
 
-        /// <summary>
-        /// .txt -> binary data (as bytes array)
-        /// </summary>
-        //public static byte[] TextToBinaryBytesArray(string fullFilePath, string fileName)
-        //{
-        //    if (checkFileExtension(fileName, "txt") && filesExistanceChecker(fullFilePath))
-        //    {
-        //        string fileText = File.ReadAllText(fullFilePath);
+            if (file.FileExtension == "txt" && file != null)
+            {
+                string fileText = Encoding.Default.GetString(file.Content);
 
-        //        using (MemoryStream memStream = new MemoryStream())
-        //        using (BinaryWriter binWriter = new BinaryWriter(memStream, Encoding.UTF8))
-        //        {
-        //            binWriter.Write(fileText);
-        //            return memStream.ToArray();
-        //        }
-        //    }
+                using (MemoryStream memStream = new MemoryStream())
+                using (BinaryWriter binWriter = new BinaryWriter(memStream, Encoding.UTF8))
+                {
+                    binWriter.Write(fileText);
 
-        //    throw new ArgumentException("File is invalid format, only .txt accepted");
+                    convertedFile = new FileDTO()
+                    {
+                        FileName = file.FileName,
+                        FileExtension = "",
+                        Content = memStream.ToArray()
+                    };
 
-        //}
+                }
+            }
 
-        // TODO 
-        // maybe move this to an extenal class/file
-        // bytes[] -> file convert || example byte[] (.zip) to actual .zip file which is savable on the disk
+            return convertedFile;
+
+        }
+        public static FileDTO TextFileToJson(FileDTO file)
+        {
+            var convertedFileDto = file;
+
+            if (file.FileExtension == "txt")
+            {
+                string fileContentAsString = Encoding.Default.GetString(file.Content);
+
+                TextFileAsJsonDTO objectForJsonSerializer = new TextFileAsJsonDTO()
+                {
+                    FileName = file.FileName,
+                    FileExtension = file.FileExtension,
+                    Content = fileContentAsString
+                };
+
+                string fileAsJson = JsonConvert.SerializeObject(objectForJsonSerializer);
+
+                byte[] jsonFileAsBytesArray = Encoding.Default.GetBytes(fileAsJson);
 
 
+                convertedFileDto = new FileDTO()
+                {
+                    FileName = file.FileName,
+                    FileExtension = "json",
+                    Content = jsonFileAsBytesArray
+                };
+                
+            }
 
+            return convertedFileDto;
+        }
 
 
         public static void SaveFilesAsZip(IList<FileDTO> files, string outputDirectory, string zipName)
@@ -142,15 +132,18 @@ namespace FileConvert
             }
         }
 
+
         public static FileDTO filePathsToFileDTO(string fullFilePath)
         {
-            var fileExists = filesExistanceChecker(fullFilePath);
+            var filePathList = new List<string>() { fullFilePath };
+            bool fileExists = FilesExistanceChecker(filePathList);
+
             FileDTO fileDto = null;
             if(fileExists)
             {
                 fileDto = new FileDTO();
                 fileDto.Content = File.ReadAllBytes(fullFilePath);
-                fileDto.FileExtension = getFileExtension(fullFilePath);
+                fileDto.FileExtension = GetFileExtension(fullFilePath);
                 fileDto.FileName = getFileName(fullFilePath);
 
             }
@@ -159,13 +152,12 @@ namespace FileConvert
         #endregion
 
         #region Helpers
-
         public static string getFileName(string fullFilePath)
         {
             string resultString = "";
 
-            string fileName = getFullFileName(fullFilePath);
-            string fileExtension = getFileExtension(fullFilePath);
+            string fileName = GetFullFileName(fullFilePath);
+            string fileExtension = GetFileExtension(fullFilePath);
 
             int fileExtensionLength = fileExtension.Length;
             int startRemoveExtensionIndex = fileName.Length - fileExtension.Length;
@@ -177,16 +169,16 @@ namespace FileConvert
             return resultString;
         }
 
-        public static string getFullFileName(string fullFilePath)
+        public static string GetFullFileName(string fullFilePath)
         {
             return Regex.Match(fullFilePath, pathToFileExpression).Value;
         }
 
-        public static string getFileExtension(string fullFilePath)
+        public static string GetFileExtension(string fullFilePath)
         {
             string extension = "";
 
-            var fileName = getFullFileName(fullFilePath);
+            var fileName = GetFullFileName(fullFilePath);
             if (fileName.Contains('.'))
             {
                 extension = Regex.Match(fileName, fileNameToExtensionExpression).Value;
@@ -195,12 +187,14 @@ namespace FileConvert
             return extension;
         }
 
-        public static bool filesExistanceChecker(IList<string> fullFilePaths)
+        public static bool FilesExistanceChecker(IList<string> fullFilePaths)
         {
             bool exists = false;
             foreach (string filePath in fullFilePaths)
             {
-                exists = filesExistanceChecker(filePath);
+                FileInfo fileInfo = new FileInfo(filePath);
+
+                exists = fileInfo.Exists;
 
                 if(!exists)
                 {
@@ -212,16 +206,7 @@ namespace FileConvert
             return exists;
         }
 
-        public static bool filesExistanceChecker(string fullFilePath)
-        {
-            FileInfo fileInfo = new FileInfo(fullFilePath);
-
-            bool fileExistance = fileInfo.Exists;
-
-            return fileExistance;
-        }
-
-        public static bool checkFileExtension(string fileName, string extension)
+        public static bool CheckFileExtension(string fileName, string extension)
         {
             bool valid = fileName.EndsWith(extension) && fileName.Contains('.');
 

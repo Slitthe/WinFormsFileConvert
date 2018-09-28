@@ -14,7 +14,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
 
 
-            string result =  FileConvertors.getFullFileName(fullFilePath);
+            string result =  FileProcessor.GetFullFileName(fullFilePath);
 
             string expected = "fileTwo.html";
 
@@ -27,7 +27,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.something.html";
 
 
-            string result = FileConvertors.getFullFileName(fullFilePath);
+            string result = FileProcessor.GetFullFileName(fullFilePath);
 
             string expected = "fileTwo.something.html";
 
@@ -40,7 +40,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo";
 
 
-            string result = FileConvertors.getFullFileName(fullFilePath);
+            string result = FileProcessor.GetFullFileName(fullFilePath);
 
             string expected = "fileTwo";
 
@@ -53,7 +53,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\";
 
 
-            string result = FileConvertors.getFullFileName(fullFilePath);
+            string result = FileProcessor.GetFullFileName(fullFilePath);
 
             string expected = "";
 

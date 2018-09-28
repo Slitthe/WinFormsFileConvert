@@ -7,23 +7,39 @@ using System.Collections.Generic;
 namespace FileProcessorUnit.Tests
 {
     [TestClass]
-    public class CheckMultipleFilesExistance
+    public class FilesExistanceChecker
     {
         [TestMethod]
-        public void WithCorrectValues()
+        public void WithSingleCorrectValues()
+        {
+            string fullFilePath1 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileThree.txt.json";
+
+            var filePathsList = new List<string>() { fullFilePath1 };
+            
+
+            bool result =  FileProcessor.FilesExistanceChecker(filePathsList);
+
+            bool expectedResult = true;
+
+            
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        public void WithMultipleCorrectValues()
         {
             string fullFilePath1 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
             string fullFilePath2 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt";
             string fullFilePath3 = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileThree.txt.json";
 
             var filePathsList = new List<string>() { fullFilePath1, fullFilePath2, fullFilePath3 };
-            
 
-            bool result =  FileConvertors.filesExistanceChecker(filePathsList);
+
+            bool result = FileProcessor.FilesExistanceChecker(filePathsList);
 
             bool expectedResult = true;
 
-            
+
 
             Assert.AreEqual(expectedResult, result);
         }
@@ -38,7 +54,7 @@ namespace FileProcessorUnit.Tests
             var filePathsList = new List<string>() { fullFilePath1, fullFilePath2, fullFilePath3 };
 
 
-            bool result = FileConvertors.filesExistanceChecker(filePathsList);
+            bool result = FileProcessor.FilesExistanceChecker(filePathsList);
 
             bool expectedResult = false;
 
@@ -55,7 +71,7 @@ namespace FileProcessorUnit.Tests
             var filePathsList = new List<string>();
 
 
-            bool result = FileConvertors.filesExistanceChecker(filePathsList);
+            bool result = FileProcessor.FilesExistanceChecker(filePathsList);
 
             bool expectedResult = false;
 

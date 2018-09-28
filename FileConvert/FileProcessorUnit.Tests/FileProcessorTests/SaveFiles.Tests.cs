@@ -9,7 +9,7 @@ using System.IO;
 namespace FileProcessorUnit.Tests
 {
     [TestClass]
-    public class FileDtosToZip
+    public class SaveFiles
     {
         [TestMethod]
         public void WithExpectedValues()
@@ -43,7 +43,7 @@ namespace FileProcessorUnit.Tests
             List<FileDTO> dummyFilesList = new List<FileDTO>() { file1Dto, file2Dto };
 
 
-            FileConvertors.SaveFiles(dummyFilesList, outputDirectory);
+            FileProcessor.SaveFiles(dummyFilesList, outputDirectory);
 
             var file1Info = new FileInfo(@"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\SaveFiles\" + file1Name + "." + file1Extension);
             var file2Info = new FileInfo(@"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\SaveFiles\" + file2Name + "." + file2Extension);

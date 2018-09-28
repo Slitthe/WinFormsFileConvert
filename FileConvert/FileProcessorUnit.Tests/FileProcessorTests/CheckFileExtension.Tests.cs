@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FileConvert;
 using FileConvert.DTOs;
+using System.Collections.Generic;
 
 namespace FileProcessorUnit.Tests
 {
@@ -14,7 +15,7 @@ namespace FileProcessorUnit.Tests
             string fileName = "something.not.actualExtension";
             string fileExtension = "actualExtension";
 
-            bool extensionCheck = FileConvertors.checkFileExtension(fileName, fileExtension);
+            bool extensionCheck = FileProcessor.CheckFileExtension(fileName, fileExtension);
 
             Assert.AreEqual(true, extensionCheck);
         }
@@ -25,7 +26,7 @@ namespace FileProcessorUnit.Tests
             string fileName = "something.not.actualExtension";
             string fileExtension = "actualExtesion";
 
-            bool extensionCheck = FileConvertors.checkFileExtension(fileName, fileExtension);
+            bool extensionCheck = FileProcessor.CheckFileExtension(fileName, fileExtension);
 
             Assert.AreEqual(false, extensionCheck);
         }
@@ -36,9 +37,11 @@ namespace FileProcessorUnit.Tests
             string fileName = "somethingnotactualExtension";
             string fileExtension = "actualExtension";
 
-            bool extensionCheck = FileConvertors.checkFileExtension(fileName, fileExtension);
+            bool extensionCheck = FileProcessor.CheckFileExtension(fileName, fileExtension);
 
             Assert.AreEqual(false, extensionCheck);
         }
+
+
     }
 }
