@@ -10,6 +10,6 @@ namespace FileConvert.DTOs
     public class FileToConvertDTO
     {
         public FileDTO FileObj { get; set; }
-        public ConvertType? ConvertMode { get; set; }
+        public ConvertType ConvertMode { get; set; }
     }
 }

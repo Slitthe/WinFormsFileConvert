@@ -10,30 +10,48 @@ namespace FileConvert.Services
 {
     public static class FileConvertors
     {
+
+        
         public static IList<FileDTO> ConvertFiles(IList<FileToConvertDTO> files)
         {
             List<FileDTO> convertedFiles = new List<FileDTO>();
 
-            for(int i = 0; i < files.Count; i++)
-            {
-                if(files[i] != null)
-                {
-                    FileDTO fileToAdd = files[i].FileObj;
-                    {
-                        switch (files[i].ConvertMode)
-                        {
-                            case Enums.ConvertType.Json:
-                                fileToAdd = FileProcessor.TextFileToJson(fileToAdd);
-                                break;
-                            case Enums.ConvertType.Binary:
-                                fileToAdd = FileProcessor.TextToBinary(fileToAdd);
-                                break;
-                        }
+            //Action<string, string> runtTest = (x,y) => Test(x, y);
+            //runtTest.Invoke("x", "y");
+            //Func<int, int, string> runCalc = (x, y) => Sum(x, y);
+            //runCalc.Invoke(1, 2);
 
-                        convertedFiles.Add(fileToAdd);
-                    }
-                }
-            }
+            // create an enum -> methods dictionary
+            // Func<FileDTO, FileDTO> creates an anonymous delegate with FileDTO input and FileDTO output
+            var convertor = new Dictionary<Enums.ConvertType, Func<FileDTO, FileDTO>>();
+
+            // add functions to the dictionary
+            convertor[Enums.ConvertType.Json] = FileProcessor.TextFileToJson;
+            convertor[Enums.ConvertType.Binary] = FileProcessor.TextToBinary;
+
+            convertedFiles = files.Where(x => x != null)  //non-null files
+                .Select(x => convertor[x.ConvertMode].Invoke(x.FileObj)) // select method based on enum and execute it
+                .ToList(); // convert it to list
+
+
+            //for (int i = 0; i < files.Count; i++)
+            //{
+            //    if (files[i] != null)
+            //    {
+            //        FileDTO fileToAdd = files[i].FileObj;
+            //        switch (files[i].ConvertMode)
+            //        {
+            //            case Enums.ConvertType.Json:
+            //                fileToAdd = FileProcessor.TextFileToJson(fileToAdd);
+            //                break;
+            //            case Enums.ConvertType.Binary:
+            //                fileToAdd = FileProcessor.TextToBinary(fileToAdd);
+            //                break;
+            //        }
+
+            //        convertedFiles.Add(fileToAdd);
+            //    }
+            //}
 
             return convertedFiles;
         }

@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileConvertorsTests\ConvertCheck.Tests.cs" />
-    <Compile Include="FileProcessorTests\FilesToZip.Tests - Copy.cs" />
+    <Compile Include="FileProcessorTests\FilesToZip.Tests.cs" />
     <Compile Include="FileProcessorTests\TextToBinary.Tests.cs" />
     <Compile Include="FileConvertorsTests\FilesObjGenerators.cs" />
     <Compile Include="FileProcessorTests\TextFileToJson.Tests.cs" />

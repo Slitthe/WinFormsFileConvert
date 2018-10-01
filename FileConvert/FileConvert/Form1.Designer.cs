@@ -28,129 +28,113 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.selectFileButton = new System.Windows.Forms.Button();
+            this.selectFilesButton = new System.Windows.Forms.Button();
             this.inputFile = new System.Windows.Forms.OpenFileDialog();
-            this.convertToJson = new System.Windows.Forms.Button();
-            this.convertToBinary = new System.Windows.Forms.Button();
-            this.convertToZip = new System.Windows.Forms.Button();
-            this.saveContent = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Selected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExtensionSelect = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.saveContentButton = new System.Windows.Forms.Button();
+            this.fileGridView = new System.Windows.Forms.DataGridView();
+            this.selectedFiles = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fileExtension = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.convertTo = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.fileGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // selectFileButton
+            // selectFilesButton
             // 
-            this.selectFileButton.Location = new System.Drawing.Point(12, 12);
-            this.selectFileButton.Name = "selectFileButton";
-            this.selectFileButton.Size = new System.Drawing.Size(101, 44);
-            this.selectFileButton.TabIndex = 0;
-            this.selectFileButton.Text = "Browse Files";
-            this.selectFileButton.UseVisualStyleBackColor = true;
-            this.selectFileButton.Click += new System.EventHandler(this.selectFileButton_Click);
+            this.selectFilesButton.Location = new System.Drawing.Point(12, 12);
+            this.selectFilesButton.Name = "selectFilesButton";
+            this.selectFilesButton.Size = new System.Drawing.Size(101, 44);
+            this.selectFilesButton.TabIndex = 0;
+            this.selectFilesButton.Text = "Select Files";
+            this.selectFilesButton.UseVisualStyleBackColor = true;
+            this.selectFilesButton.Click += new System.EventHandler(this.selectFileButton_Click);
             // 
             // inputFile
             // 
             this.inputFile.FileName = "inputFile";
             this.inputFile.FileOk += new System.ComponentModel.CancelEventHandler(this.inputFile_FileOk);
             // 
-            // convertToJson
+            // saveContentButton
             // 
-            this.convertToJson.Location = new System.Drawing.Point(473, 12);
-            this.convertToJson.Name = "convertToJson";
-            this.convertToJson.Size = new System.Drawing.Size(96, 44);
-            this.convertToJson.TabIndex = 1;
-            this.convertToJson.Text = "Convert to JSON";
-            this.convertToJson.UseVisualStyleBackColor = true;
+            this.saveContentButton.Location = new System.Drawing.Point(12, 399);
+            this.saveContentButton.Name = "saveContentButton";
+            this.saveContentButton.Size = new System.Drawing.Size(101, 39);
+            this.saveContentButton.TabIndex = 4;
+            this.saveContentButton.Text = "Save Files";
+            this.saveContentButton.UseVisualStyleBackColor = true;
+            this.saveContentButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // convertToBinary
+            // fileGridView
             // 
-            this.convertToBinary.Location = new System.Drawing.Point(575, 12);
-            this.convertToBinary.Name = "convertToBinary";
-            this.convertToBinary.Size = new System.Drawing.Size(101, 44);
-            this.convertToBinary.TabIndex = 2;
-            this.convertToBinary.Text = "Convert to Binary";
-            this.convertToBinary.UseVisualStyleBackColor = true;
+            this.fileGridView.AllowUserToAddRows = false;
+            this.fileGridView.AllowUserToDeleteRows = false;
+            this.fileGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.fileGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.selectedFiles,
+            this.fileName,
+            this.fileExtension,
+            this.convertTo});
+            this.fileGridView.Location = new System.Drawing.Point(12, 77);
+            this.fileGridView.Name = "fileGridView";
+            this.fileGridView.Size = new System.Drawing.Size(945, 316);
+            this.fileGridView.TabIndex = 5;
+            this.fileGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_2);
             // 
-            // convertToZip
+            // selectedFiles
             // 
-            this.convertToZip.Location = new System.Drawing.Point(683, 13);
-            this.convertToZip.Name = "convertToZip";
-            this.convertToZip.Size = new System.Drawing.Size(105, 43);
-            this.convertToZip.TabIndex = 3;
-            this.convertToZip.Text = "Convert to ZIP";
-            this.convertToZip.UseVisualStyleBackColor = true;
+            this.selectedFiles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.selectedFiles.Frozen = true;
+            this.selectedFiles.HeaderText = "Select";
+            this.selectedFiles.Name = "selectedFiles";
+            this.selectedFiles.Width = 43;
             // 
-            // saveContent
+            // fileName
             // 
-            this.saveContent.Location = new System.Drawing.Point(12, 399);
-            this.saveContent.Name = "saveContent";
-            this.saveContent.Size = new System.Drawing.Size(101, 39);
-            this.saveContent.TabIndex = 4;
-            this.saveContent.Text = "Save Files";
-            this.saveContent.UseVisualStyleBackColor = true;
-            this.saveContent.Click += new System.EventHandler(this.button1_Click);
+            this.fileName.Frozen = true;
+            this.fileName.HeaderText = "File Name";
+            this.fileName.Name = "fileName";
             // 
-            // dataGridView1
+            // fileExtension
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Selected,
-            this.FileName,
-            this.ExtensionSelect});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 85);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(776, 308);
-            this.dataGridView1.TabIndex = 5;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            this.fileExtension.Frozen = true;
+            this.fileExtension.HeaderText = "File Extension";
+            this.fileExtension.Name = "fileExtension";
+            this.fileExtension.ReadOnly = true;
             // 
-            // Selected
+            // convertTo
             // 
-            this.Selected.HeaderText = "Column1";
-            this.Selected.Name = "Selected";
-            // 
-            // FileName
-            // 
-            this.FileName.HeaderText = "File Name";
-            this.FileName.Name = "FileName";
-            // 
-            // ExtensionSelect
-            // 
-            this.ExtensionSelect.HeaderText = "Extension Select";
-            this.ExtensionSelect.Name = "ExtensionSelect";
+            this.convertTo.Frozen = true;
+            this.convertTo.HeaderText = "Convert To";
+            this.convertTo.Items.AddRange(new object[] {
+            "JSON,",
+            "Binary"});
+            this.convertTo.Name = "convertTo";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 466);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.saveContent);
-            this.Controls.Add(this.convertToZip);
-            this.Controls.Add(this.convertToBinary);
-            this.Controls.Add(this.convertToJson);
-            this.Controls.Add(this.selectFileButton);
+            this.ClientSize = new System.Drawing.Size(969, 492);
+            this.Controls.Add(this.fileGridView);
+            this.Controls.Add(this.saveContentButton);
+            this.Controls.Add(this.selectFilesButton);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button selectFileButton;
+        private System.Windows.Forms.Button selectFilesButton;
         private System.Windows.Forms.OpenFileDialog inputFile;
-        private System.Windows.Forms.Button convertToJson;
-        private System.Windows.Forms.Button convertToBinary;
-        private System.Windows.Forms.Button convertToZip;
-        private System.Windows.Forms.Button saveContent;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Selected;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
-        private System.Windows.Forms.DataGridViewComboBoxColumn ExtensionSelect;
+        private System.Windows.Forms.Button saveContentButton;
+        private System.Windows.Forms.DataGridView fileGridView;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn selectedFiles;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fileExtension;
+        private System.Windows.Forms.DataGridViewComboBoxColumn convertTo;
     }
 }
 
