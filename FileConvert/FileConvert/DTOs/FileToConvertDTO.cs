@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FileConvert.DTOs
 {
-    public class FileToConvert
+    public class FileToConvertDTO
     {
-        public FileDTO file { get; set; }
-        public ConvertType ConvertMode { get; set; }
+        public FileDTO FileObj { get; set; }
+        public ConvertType? ConvertMode { get; set; }
     }
 }

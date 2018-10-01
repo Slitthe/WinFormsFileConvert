@@ -26,7 +26,7 @@ namespace FileConvert
         {
             var senderCast = (OpenFileDialog)sender;
             
-            filePathText.Text = senderCast.FileName;
+            //filePathText.Text = senderCast.FileName;
 
 
         }
@@ -42,6 +42,16 @@ namespace FileConvert
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }

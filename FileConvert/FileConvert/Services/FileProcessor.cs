@@ -14,42 +14,7 @@ namespace FileConvert
     public static class FileProcessor
     {
         #region Convertors
-        private static byte[] FileDtoListToZip(IList<FileDTO> files)
-        {
-            if (files.Count > 0)
-            {
-                byte[] zipFileBytes;
-                var zipFile = new MemoryStream();
-                // create/open archive
 
-                using (ZipArchive archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
-                {
-                    foreach (FileDTO file in files)
-                    {
-                        // add each file to archive
-                        string fileName = file.FileName + '.' + file.FileExtension;
-                        var curentEntry = archive.CreateEntry(fileName);
-
-                        using (var openedEntry = curentEntry.Open())
-                        {
-                            openedEntry.Write(file.Content, 0, file.Content.Length);
-                        }
-
-                    }
-
-                    archive.Dispose();
-                    // get archive as bytes
-                    zipFileBytes = zipFile.ToArray();
-                }
-
-                return zipFileBytes;
-            }
-            else
-            {
-                throw new FileNotFoundException("One or more of the inputs file couldn't be found");
-            }
-
-        }
         public static FileDTO TextToBinary(FileDTO file)
         {
             var convertedFile = file;
@@ -108,13 +73,18 @@ namespace FileConvert
             return convertedFileDto;
         }
 
-        public static void SaveFilesAsZip(IList<FileDTO> files, string outputDirectory, string zipName)
+        public static FileDTO FilesToZip(IList<FileDTO> files, string zipName)
         {
             byte[] fileZip = FileDtoListToZip(files);
 
-            string fullPath = $"{outputDirectory}\\{zipName}.zip";
-
-            File.WriteAllBytes(fullPath, fileZip);
+            FileDTO zipFile = new FileDTO
+            {
+                Content = fileZip,
+                FileName = zipName,
+                FileExtension = "zip"
+            };
+            
+            return zipFile;
         }
 
         public static void SaveFiles(IList<FileDTO> files, string outputDirectoryPath)
@@ -212,7 +182,41 @@ namespace FileConvert
             return valid;
         }
 
+        private static byte[] FileDtoListToZip(IList<FileDTO> files)
+        {
+            if (files.Count > 0)
+            {
+                byte[] zipFileBytes;
+                var zipFile = new MemoryStream();
+                // create/open archive
 
+                using (ZipArchive archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
+                {
+                    foreach (FileDTO file in files)
+                    {
+                        // add each file to archive
+                        string fileName = file.FileName + '.' + file.FileExtension;
+                        var curentEntry = archive.CreateEntry(fileName);
+
+                        using (var openedEntry = curentEntry.Open())
+                        {
+                            openedEntry.Write(file.Content, 0, file.Content.Length);
+                        }
+
+                    }
+
+                    archive.Dispose();
+                    // get archive as bytes
+                    zipFileBytes = zipFile.ToArray();
+                }
+
+                return zipFileBytes;
+            }
+            else
+            {
+                throw new FileNotFoundException("One or more of the inputs file couldn't be found");
+            }
+        }
         private static string pathToFileExpression = @"[^\\]+?$";
 
         private static string fileNameToExtensionExpression = @"[^\.]+?$";
