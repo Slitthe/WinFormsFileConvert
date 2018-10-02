@@ -32,10 +32,13 @@ namespace FileConvertorsUnit.Tests
         [TestMethod]
         public void CheckConvertContent()
         {
+
+            // convert files by method
             var filesToConvertDummyData = FilesObjGenerators.GetFilesToConvertList();
             
+            
+            // manually convert
             var convertedFilesList = FileConvertors.ConvertFiles(filesToConvertDummyData);
-
             var file1ActualJson = convertedFilesList[0];
             var file2ActualBinary = convertedFilesList[1];
 

@@ -29,13 +29,11 @@
         private void InitializeComponent()
         {
             this.selectFilesButton = new System.Windows.Forms.Button();
-            this.inputFile = new System.Windows.Forms.OpenFileDialog();
             this.saveContentButton = new System.Windows.Forms.Button();
             this.fileGridView = new System.Windows.Forms.DataGridView();
-            this.selectedFiles = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fileExtension = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.convertTo = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.browserFilesDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.deleteSelectedButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,12 +45,7 @@
             this.selectFilesButton.TabIndex = 0;
             this.selectFilesButton.Text = "Select Files";
             this.selectFilesButton.UseVisualStyleBackColor = true;
-            this.selectFilesButton.Click += new System.EventHandler(this.selectFileButton_Click);
-            // 
-            // inputFile
-            // 
-            this.inputFile.FileName = "inputFile";
-            this.inputFile.FileOk += new System.ComponentModel.CancelEventHandler(this.inputFile_FileOk);
+            this.selectFilesButton.Click += new System.EventHandler(this.selectFilesButton_Click);
             // 
             // saveContentButton
             // 
@@ -62,59 +55,40 @@
             this.saveContentButton.TabIndex = 4;
             this.saveContentButton.Text = "Save Files";
             this.saveContentButton.UseVisualStyleBackColor = true;
-            this.saveContentButton.Click += new System.EventHandler(this.button1_Click);
+            this.saveContentButton.Click += new System.EventHandler(this.saveContentButton_Click);
             // 
             // fileGridView
             // 
             this.fileGridView.AllowUserToAddRows = false;
             this.fileGridView.AllowUserToDeleteRows = false;
             this.fileGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.fileGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.selectedFiles,
-            this.fileName,
-            this.fileExtension,
-            this.convertTo});
             this.fileGridView.Location = new System.Drawing.Point(12, 77);
             this.fileGridView.Name = "fileGridView";
             this.fileGridView.Size = new System.Drawing.Size(945, 316);
             this.fileGridView.TabIndex = 5;
-            this.fileGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_2);
             // 
-            // selectedFiles
+            // browserFilesDialog
             // 
-            this.selectedFiles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.selectedFiles.Frozen = true;
-            this.selectedFiles.HeaderText = "Select";
-            this.selectedFiles.Name = "selectedFiles";
-            this.selectedFiles.Width = 43;
+            this.browserFilesDialog.FileName = "browserFilesDialog";
+            this.browserFilesDialog.Multiselect = true;
+            this.browserFilesDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.browserFilesDialog_FileOk);
             // 
-            // fileName
+            // deleteSelectedButton
             // 
-            this.fileName.Frozen = true;
-            this.fileName.HeaderText = "File Name";
-            this.fileName.Name = "fileName";
-            // 
-            // fileExtension
-            // 
-            this.fileExtension.Frozen = true;
-            this.fileExtension.HeaderText = "File Extension";
-            this.fileExtension.Name = "fileExtension";
-            this.fileExtension.ReadOnly = true;
-            // 
-            // convertTo
-            // 
-            this.convertTo.Frozen = true;
-            this.convertTo.HeaderText = "Convert To";
-            this.convertTo.Items.AddRange(new object[] {
-            "JSON,",
-            "Binary"});
-            this.convertTo.Name = "convertTo";
+            this.deleteSelectedButton.Location = new System.Drawing.Point(839, 12);
+            this.deleteSelectedButton.Name = "deleteSelectedButton";
+            this.deleteSelectedButton.Size = new System.Drawing.Size(118, 43);
+            this.deleteSelectedButton.TabIndex = 6;
+            this.deleteSelectedButton.Text = "Delete Selected";
+            this.deleteSelectedButton.UseVisualStyleBackColor = true;
+            this.deleteSelectedButton.Click += new System.EventHandler(this.deleteSelectedButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 492);
+            this.Controls.Add(this.deleteSelectedButton);
             this.Controls.Add(this.fileGridView);
             this.Controls.Add(this.saveContentButton);
             this.Controls.Add(this.selectFilesButton);
@@ -128,13 +102,11 @@
         #endregion
 
         private System.Windows.Forms.Button selectFilesButton;
-        private System.Windows.Forms.OpenFileDialog inputFile;
         private System.Windows.Forms.Button saveContentButton;
         private System.Windows.Forms.DataGridView fileGridView;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn selectedFiles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fileExtension;
-        private System.Windows.Forms.DataGridViewComboBoxColumn convertTo;
+        private System.Windows.Forms.OpenFileDialog browserFilesDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button deleteSelectedButton;
     }
 }
 

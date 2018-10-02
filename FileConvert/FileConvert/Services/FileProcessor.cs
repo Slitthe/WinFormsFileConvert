@@ -99,6 +99,7 @@ namespace FileConvert
                 }
             }
         }
+        // C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt
 
         public static FileDTO FilePathsToFileDTO(string fullFilePath)
         {
@@ -116,7 +117,25 @@ namespace FileConvert
             }
             return fileDto;
         }
+
+        public static IList<FileDTO> FilePathsListToFileDTOList(IList<string> fullFilePaths)
+        {
+            IList<FileDTO> filesDTO = new List<FileDTO>();
+
+            foreach(string filePath in fullFilePaths)
+            {
+                FileDTO pathToFileDTO = FilePathsToFileDTO(filePath);
+                filesDTO.Add(pathToFileDTO);
+            }
+
+            return filesDTO;
+        }
+
         #endregion
+
+
+
+
 
 
 
