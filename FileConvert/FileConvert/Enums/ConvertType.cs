@@ -8,7 +8,9 @@ namespace FileConvert.Enums
 {
     public enum ConvertType
     {
+        None,
         Json,
         Binary
+        
     }
 }

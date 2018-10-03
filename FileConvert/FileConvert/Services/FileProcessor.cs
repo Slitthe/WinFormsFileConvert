@@ -19,7 +19,7 @@ namespace FileConvert
         {
             var convertedFile = file;
 
-            if (file.FileExtension == "txt" && file != null)
+            if (file.FileExtension == "txt")
             {
                 string fileText = Encoding.Default.GetString(file.Content);
 
@@ -87,7 +87,7 @@ namespace FileConvert
             return zipFile;
         }
 
-        public static void SaveFiles(IList<FileDTO> files, string outputDirectoryPath)
+        public static void SaveFiles(IList<FileDTO> files, string outputDirectoryPath, bool overwriteExisting)
         {
 
             foreach (var file in files)
@@ -95,10 +95,31 @@ namespace FileConvert
                 if( file != null )
                 {
                     string fullPath = $"{outputDirectoryPath}\\{file.FileName}.{file.FileExtension}";
-                    File.WriteAllBytes(fullPath, file.Content);
+                    
+                    var fileInfo = new FileInfo(fullPath);
+
+                    // wtf logic?!
+                    if(fileInfo.Exists)
+                    {
+                        if (overwriteExisting)
+                        {
+                            File.WriteAllBytes(fullPath, file.Content);
+                        }
+                    }
+                    else
+                    {
+                        File.WriteAllBytes(fullPath, file.Content);
+                    }
                 }
             }
         }
+
+
+        public static void SaveFile(FileDTO file, string fileOutputFullPath)
+        {
+            File.WriteAllBytes(fileOutputFullPath, file.Content); 
+        }
+
         // C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileOne.txt
 
         public static FileDTO FilePathsToFileDTO(string fullFilePath)
@@ -209,7 +230,7 @@ namespace FileConvert
                 var zipFile = new MemoryStream();
                 // create/open archive
 
-                using (ZipArchive archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
+                using (var archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
                 {
                     foreach (FileDTO file in files)
                     {
@@ -231,10 +252,9 @@ namespace FileConvert
 
                 return zipFileBytes;
             }
-            else
-            {
-                throw new FileNotFoundException("One or more of the inputs file couldn't be found");
-            }
+
+            return null;
+
         }
         private static string pathToFileExpression = @"[^\\]+?$";
 

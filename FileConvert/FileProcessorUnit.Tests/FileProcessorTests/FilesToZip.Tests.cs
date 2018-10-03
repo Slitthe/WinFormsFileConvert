@@ -40,7 +40,7 @@ namespace FileProcessorUnit.Tests
                 filesListToZip
             };
 
-            FileProcessor.SaveFiles(filesToSave, savePath);
+            FileProcessor.SaveFiles(filesToSave, savePath, false);
 
 
             // check for results
@@ -92,7 +92,7 @@ namespace FileProcessorUnit.Tests
                 filesListToZip
             };
 
-            FileProcessor.SaveFiles(filesToSave, savePath);
+            FileProcessor.SaveFiles(filesToSave, savePath, false);
             bool correctEntriesNumber = false;
             bool correctEntryName = false;
 
