@@ -11,6 +11,5 @@ namespace FileConvert.Enums
         None,
         Json,
         Binary
-        
     }
 }

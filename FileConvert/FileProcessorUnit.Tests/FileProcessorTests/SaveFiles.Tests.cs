@@ -5,6 +5,7 @@ using FileConvert.DTOs;
 using System.Text;
 using System.Collections.Generic;
 using System.IO;
+using FileConvert.Services;
 
 namespace FileProcessorUnit.Tests
 {
@@ -21,7 +22,7 @@ namespace FileProcessorUnit.Tests
             string file1AsString = "I am a string and nothing more";
             byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(file1AsString);
 
-            var file1Dto = new FileDTO()
+            var file1Dto = new FileDto()
             {
                 FileName = file1Name,
                 FileExtension = file1Extension,
@@ -33,14 +34,14 @@ namespace FileProcessorUnit.Tests
             string file2AsString = "I am a another string and nothing more";
             byte[] file2AsArrayOfBytes = Encoding.Default.GetBytes(file2AsString);
 
-            var file2Dto = new FileDTO()
+            var file2Dto = new FileDto()
             {
                 FileName = file2Name,
                 FileExtension = file2Extension,
                 Content = file2AsArrayOfBytes
             };
 
-            List<FileDTO> dummyFilesList = new List<FileDTO>() { file1Dto, file2Dto };
+            List<FileDto> dummyFilesList = new List<FileDto>() { file1Dto, file2Dto };
 
 
             FileConvertors.SaveFiles(dummyFilesList, outputDirectory, true);
@@ -70,14 +71,14 @@ namespace FileProcessorUnit.Tests
             string file2AsString = "I am a another string and nothing more";
             byte[] file2AsArrayOfBytes = Encoding.Default.GetBytes(file2AsString);
 
-            var file2Dto = new FileDTO()
+            var file2Dto = new FileDto()
             {
                 FileName = file2Name,
                 FileExtension = file2Extension,
                 Content = file2AsArrayOfBytes
             };
 
-            List<FileDTO> dummyFilesList = new List<FileDTO>() { file2Dto, null };
+            List<FileDto> dummyFilesList = new List<FileDto>() { file2Dto, null };
 
 
             FileConvertors.SaveFiles(dummyFilesList, outputDirectory, true);

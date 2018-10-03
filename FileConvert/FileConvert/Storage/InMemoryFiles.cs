@@ -1,35 +1,30 @@
 ﻿using FileConvert.DTOs;
 using FileConvert.Enums;
-using FileConvert.Services;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using FileConvert.Services;
 
 namespace FileConvert.Storage
 {
     public static class InMemoryFiles
     {
-        public static Dictionary<DataGridViewRow, FileToConvertDTO> FilesDictionary { get; set; }
-
         static InMemoryFiles()
         {
-            FilesDictionary = new Dictionary<DataGridViewRow, FileToConvertDTO>();
+            FilesDictionary = new Dictionary<DataGridViewRow, FileToConvertDto>();
         }
-
-        public static void AddRowToList(DataGridViewRow row, FileDTO fileToAdd)
+        public static Dictionary<DataGridViewRow, FileToConvertDto> FilesDictionary { get; set; }
+        public static void AddRowToList(DataGridViewRow row, FileDto fileToAdd)
         {
-            // create the FileToConvertDto from the fileAdded
-
-            FileToConvertDTO fileToConvert = new FileToConvertDTO()
+            FileToConvertDto fileToConvert = new FileToConvertDto()
             {
                 FileObj = fileToAdd
             };
 
             FilesDictionary.Add(row, fileToConvert);
         }
-
-        public static List<FileToConvertDTO> GetMatchingFiles(IList<DataGridViewRow> rows)
+        public static List<FileToConvertDto> GetMatchingFiles(IList<DataGridViewRow> rows)
         {
-            var matchingFiles = new List<FileToConvertDTO>();
+            var matchingFiles = new List<FileToConvertDto>();
 
             foreach(var row in rows)
             {
@@ -48,18 +43,16 @@ namespace FileConvert.Storage
                 FilesDictionary[row].ConvertMode = newConvertType;
             }
         }
-
         public static void RemoveSpecificFile(DataGridViewRow rowToRemove)
         {
             FilesDictionary.Remove(rowToRemove);
         }
-
         public static void ConvertFiles(List<DataGridViewRow> rows)
         {
             foreach (var row in rows)
             {
                 var currentFile = FilesDictionary[row];
-                var convertedFile = new FileToConvertDTO()
+                var convertedFile = new FileToConvertDto()
                 {
                     ConvertMode = ConvertType.None,
                     FileObj = FileConvertors.ConvertFile(currentFile)
@@ -67,11 +60,6 @@ namespace FileConvert.Storage
                 FilesDictionary[row] = convertedFile;
             }
             
-        }
-
-        public static void RemoveAllFiles()
-        {
-            FilesDictionary.Clear();
         }
     }
 }

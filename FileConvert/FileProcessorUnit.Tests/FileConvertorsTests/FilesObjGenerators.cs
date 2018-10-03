@@ -7,28 +7,28 @@ namespace FileConvertorsUnit.Tests
 {
     public static class FilesObjGenerators
     {
-        public static List<FileToConvertDTO> GetFilesToConvertList()
+        public static List<FileToConvertDto> GetFilesToConvertList()
         {
             string basePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests";
 
             var textFileContent = File.ReadAllBytes(basePath + @"\fileOne.txt");
             var nonTextFileContent = File.ReadAllBytes(basePath + @"\fileTwo.html");
 
-            var filesList = new List<FileDTO>()
+            var filesList = new List<FileDto>()
             {
-                new FileDTO()
+                new FileDto()
                 {
                     Content = textFileContent,
                     FileExtension = "txt",
                     FileName = "textFileOne"
                 },
-                new FileDTO()
+                new FileDto()
                 {
                     Content = textFileContent,
                     FileExtension = "txt",
                     FileName = "textFileTwo"
                 },
-                new FileDTO()
+                new FileDto()
                 {
                     Content = nonTextFileContent,
                     FileExtension = "html",
@@ -36,19 +36,19 @@ namespace FileConvertorsUnit.Tests
                 }
             };
 
-            var filesToConvertList = new List<FileToConvertDTO>()
+            var filesToConvertList = new List<FileToConvertDto>()
             {
-                new FileToConvertDTO()
+                new FileToConvertDto()
                 {
                     FileObj = filesList[0],
                     ConvertMode = ConvertType.Json
                 },
-                new FileToConvertDTO()
+                new FileToConvertDto()
                 {
                     FileObj = filesList[1],
                     ConvertMode = ConvertType.Binary
                 },
-                new FileToConvertDTO()
+                new FileToConvertDto()
                 {
                     FileObj = filesList[2]
                 },

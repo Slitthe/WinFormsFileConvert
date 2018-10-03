@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Text;
+using FileConvert.Services;
 
 namespace FileProcessorUnit.Tests
 {
@@ -19,7 +20,7 @@ namespace FileProcessorUnit.Tests
             string file1AsString = "I am a string and nothing more";
             byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(file1AsString);
 
-            FileDTO file1Dto = new FileDTO()
+            FileDto file1Dto = new FileDto()
             {
                 FileName = file1Name,
                 FileExtension = file1Extension,
@@ -28,14 +29,14 @@ namespace FileProcessorUnit.Tests
 
 
             // convert object to json
-            FileDTO file1AsJson = FileConvertors.TextFileToJson(file1Dto);
+            FileDto file1AsJson = FileConvertors.TextFileToJson(file1Dto);
      
             // convert file content as string
             string file1AsJsonToString = Encoding.Default.GetString(file1AsJson.Content);
 
             // Expected (manually convert)
 
-            TextFileAsJsonDTO fileAsJsonDTo = new TextFileAsJsonDTO()
+            TextFileAsJsonDto fileAsJsonDTo = new TextFileAsJsonDto()
             {
                 FileName = file1Dto.FileName,
                 FileExtension = file1Dto.FileExtension,
@@ -66,7 +67,7 @@ namespace FileProcessorUnit.Tests
             string file1AsString = "I am a string and nothing more";
             byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(file1AsString);
 
-            FileDTO file1Dto = new FileDTO()
+            FileDto file1Dto = new FileDto()
             {
                 FileName = file1Name,
                 FileExtension = file1Extension,
@@ -75,7 +76,7 @@ namespace FileProcessorUnit.Tests
 
 
             // convert object to json
-            FileDTO file1AsJson = FileConvertors.TextFileToJson(file1Dto);
+            FileDto file1AsJson = FileConvertors.TextFileToJson(file1Dto);
 
 
 

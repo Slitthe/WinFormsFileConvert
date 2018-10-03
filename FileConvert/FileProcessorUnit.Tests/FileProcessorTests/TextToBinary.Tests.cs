@@ -5,6 +5,7 @@ using FileConvert.DTOs;
 using System.Text;
 using System.IO;
 using System.Collections;
+using FileConvert.Services;
 
 namespace FileProcessorUnit.Tests
 {
@@ -21,7 +22,7 @@ namespace FileProcessorUnit.Tests
             string expectedString = "I am a string and nothing more őóá";
 
             byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(expectedString);
-            FileDTO file1Dto = new FileDTO()
+            FileDto file1Dto = new FileDto()
             {
                 FileName = file1Name,
                 FileExtension = file1Extension,
@@ -29,7 +30,7 @@ namespace FileProcessorUnit.Tests
             };
 
             // Convert
-            FileDTO fileAsBinary = FileConvertors.TextToBinary(file1Dto);
+            FileDto fileAsBinary = FileConvertors.TextToBinary(file1Dto);
             byte[] file1 = fileAsBinary.Content;
             
             MemoryStream memoryStream = new MemoryStream();
@@ -59,7 +60,7 @@ namespace FileProcessorUnit.Tests
             string expectedString = "I am a string and nothing more";
 
             byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(expectedString);
-            FileDTO file1Dto = new FileDTO()
+            FileDto file1Dto = new FileDto()
             {
                 FileName = file1Name,
                 FileExtension = file1Extension,
@@ -67,7 +68,7 @@ namespace FileProcessorUnit.Tests
             };
 
             // Convert
-            FileDTO fileAsBinary = FileConvertors.TextToBinary(file1Dto);
+            FileDto fileAsBinary = FileConvertors.TextToBinary(file1Dto);
 
 
             // Assert
