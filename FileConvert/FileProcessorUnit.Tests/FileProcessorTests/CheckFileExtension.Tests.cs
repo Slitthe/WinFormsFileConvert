@@ -1,4 +1,5 @@
 ﻿using FileConvert;
+using FileConvert.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FileProcessorUnit.Tests
@@ -12,7 +13,7 @@ namespace FileProcessorUnit.Tests
             string fileName = "something.not.actualExtension";
             string fileExtension = "actualExtension";
 
-            bool extensionCheck = FileProcessor.CheckFileExtension(fileName, fileExtension);
+            bool extensionCheck = FileNameHelpers.CheckFileExtension(fileName, fileExtension);
 
             Assert.AreEqual(true, extensionCheck);
         }
@@ -23,7 +24,7 @@ namespace FileProcessorUnit.Tests
             string fileName = "something.not.actualExtension";
             string fileExtension = "actualExtesion";
 
-            bool extensionCheck = FileProcessor.CheckFileExtension(fileName, fileExtension);
+            bool extensionCheck = FileNameHelpers.CheckFileExtension(fileName, fileExtension);
 
             Assert.AreEqual(false, extensionCheck);
         }
@@ -34,7 +35,7 @@ namespace FileProcessorUnit.Tests
             string fileName = "somethingnotactualExtension";
             string fileExtension = "actualExtension";
 
-            bool extensionCheck = FileProcessor.CheckFileExtension(fileName, fileExtension);
+            bool extensionCheck = FileNameHelpers.CheckFileExtension(fileName, fileExtension);
 
             Assert.AreEqual(false, extensionCheck);
         }

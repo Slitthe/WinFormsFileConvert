@@ -46,7 +46,7 @@
             this.selectFilesButton.Name = "selectFilesButton";
             this.selectFilesButton.Size = new System.Drawing.Size(101, 44);
             this.selectFilesButton.TabIndex = 0;
-            this.selectFilesButton.Text = "Select Files";
+            this.selectFilesButton.Text = "Add Files";
             this.selectFilesButton.UseVisualStyleBackColor = true;
             this.selectFilesButton.Click += new System.EventHandler(this.selectFilesButton_Click);
             // 

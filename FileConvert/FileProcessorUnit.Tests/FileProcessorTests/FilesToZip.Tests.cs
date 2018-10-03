@@ -33,14 +33,14 @@ namespace FileProcessorUnit.Tests
             string fullFileSavePath = $"{savePath}\\{zipName}.zip";
 
             // execute external test methods
-            FileDTO filesListToZip = FileProcessor.FilesToZip(fileList, zipName);
+            FileDTO filesListToZip = FileConvertors.FilesToZip(fileList, zipName);
 
             List<FileDTO> filesToSave = new List<FileDTO>()
             {
                 filesListToZip
             };
 
-            FileProcessor.SaveFiles(filesToSave, savePath, false);
+            FileConvertors.SaveFiles(filesToSave, savePath, false);
 
 
             // check for results
@@ -85,14 +85,14 @@ namespace FileProcessorUnit.Tests
             string fullFileSavePath = $"{savePath}\\{zipName}.zip";
 
             // execute external test methods
-            FileDTO filesListToZip = FileProcessor.FilesToZip(fileList, zipName);
+            FileDTO filesListToZip = FileConvertors.FilesToZip(fileList, zipName);
 
             List<FileDTO> filesToSave = new List<FileDTO>()
             {
                 filesListToZip
             };
 
-            FileProcessor.SaveFiles(filesToSave, savePath, false);
+            FileConvertors.SaveFiles(filesToSave, savePath, false);
             bool correctEntriesNumber = false;
             bool correctEntryName = false;
 

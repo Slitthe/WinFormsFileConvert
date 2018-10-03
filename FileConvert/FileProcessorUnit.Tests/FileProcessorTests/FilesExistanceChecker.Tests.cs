@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FileConvert;
 using FileConvert.DTOs;
 using System.Collections.Generic;
+using FileConvert.Services;
 
 namespace FileProcessorUnit.Tests
 {
@@ -17,7 +18,7 @@ namespace FileProcessorUnit.Tests
             var filePathsList = new List<string>() { fullFilePath1 };
             
 
-            bool result =  FileProcessor.FilesExistanceChecker(filePathsList);
+            bool result = FileNameHelpers.FilesExistenceChecker(filePathsList);
 
             bool expectedResult = true;
 
@@ -36,7 +37,7 @@ namespace FileProcessorUnit.Tests
             var filePathsList = new List<string>() { fullFilePath1, fullFilePath2, fullFilePath3 };
 
 
-            bool result = FileProcessor.FilesExistanceChecker(filePathsList);
+            bool result = FileNameHelpers.FilesExistenceChecker(filePathsList);
 
             bool expectedResult = true;
 
@@ -55,7 +56,7 @@ namespace FileProcessorUnit.Tests
             var filePathsList = new List<string>() { fullFilePath1, fullFilePath2, fullFilePath3 };
 
 
-            bool result = FileProcessor.FilesExistanceChecker(filePathsList);
+            bool result = FileNameHelpers.FilesExistenceChecker(filePathsList);
 
             bool expectedResult = false;
 
@@ -72,7 +73,7 @@ namespace FileProcessorUnit.Tests
             var filePathsList = new List<string>();
 
 
-            bool result = FileProcessor.FilesExistanceChecker(filePathsList);
+            bool result = FileNameHelpers.FilesExistenceChecker(filePathsList);
 
             bool expectedResult = false;
 

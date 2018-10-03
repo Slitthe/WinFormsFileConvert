@@ -28,7 +28,7 @@ namespace FileProcessorUnit.Tests
 
 
             // convert object to json
-            FileDTO file1AsJson = FileProcessor.TextFileToJson(file1Dto);
+            FileDTO file1AsJson = FileConvertors.TextFileToJson(file1Dto);
      
             // convert file content as string
             string file1AsJsonToString = Encoding.Default.GetString(file1AsJson.Content);
@@ -75,7 +75,7 @@ namespace FileProcessorUnit.Tests
 
 
             // convert object to json
-            FileDTO file1AsJson = FileProcessor.TextFileToJson(file1Dto);
+            FileDTO file1AsJson = FileConvertors.TextFileToJson(file1Dto);
 
 
 

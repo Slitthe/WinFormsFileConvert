@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FileConvert;
 using FileConvert.DTOs;
+using FileConvert.Services;
 
 namespace FileProcessorUnit.Tests
 {
@@ -14,7 +15,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.html";
 
 
-            string result =  FileProcessor.GetFileName(fullFilePath);
+            string result = FileNameHelpers.GetFileName(fullFilePath);
 
             string expected = "fileTwo";
 
@@ -27,7 +28,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\fileTwo.antoher.html";
 
 
-            string result = FileProcessor.GetFileName(fullFilePath);
+            string result = FileNameHelpers.GetFileName(fullFilePath);
 
             string expected = "fileTwo.antoher";
 
@@ -40,7 +41,7 @@ namespace FileProcessorUnit.Tests
             string fullFilePath = @"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\";
 
 
-            string result = FileProcessor.GetFileName(fullFilePath);
+            string result = FileNameHelpers.GetFileName(fullFilePath);
 
             string expected = "";
 

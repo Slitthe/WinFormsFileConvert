@@ -43,7 +43,7 @@ namespace FileProcessorUnit.Tests
             List<FileDTO> dummyFilesList = new List<FileDTO>() { file1Dto, file2Dto };
 
 
-            FileProcessor.SaveFiles(dummyFilesList, outputDirectory, true);
+            FileConvertors.SaveFiles(dummyFilesList, outputDirectory, true);
 
             var file1Info = new FileInfo(@"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\SaveFiles\" + file1Name + "." + file1Extension);
             var file2Info = new FileInfo(@"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\SaveFiles\" + file2Name + "." + file2Extension);
@@ -80,7 +80,7 @@ namespace FileProcessorUnit.Tests
             List<FileDTO> dummyFilesList = new List<FileDTO>() { file2Dto, null };
 
 
-            FileProcessor.SaveFiles(dummyFilesList, outputDirectory, true);
+            FileConvertors.SaveFiles(dummyFilesList, outputDirectory, true);
 
             var file2Info = new FileInfo(@"C:\Users\silviu.gherman\Desktop\DirectoryForUnitTests\SaveFiles\" + file2Name + "." + file2Extension);
             try

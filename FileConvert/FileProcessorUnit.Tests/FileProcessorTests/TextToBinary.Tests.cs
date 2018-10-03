@@ -18,7 +18,7 @@ namespace FileProcessorUnit.Tests
             // Test data
             string file1Extension = "txt";
             string file1Name = "unitTestExample1";
-            string expectedString = "I am a string and nothing more";
+            string expectedString = "I am a string and nothing more őóá";
 
             byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(expectedString);
             FileDTO file1Dto = new FileDTO()
@@ -29,7 +29,7 @@ namespace FileProcessorUnit.Tests
             };
 
             // Convert
-            FileDTO fileAsBinary = FileProcessor.TextToBinary(file1Dto);
+            FileDTO fileAsBinary = FileConvertors.TextToBinary(file1Dto);
             byte[] file1 = fileAsBinary.Content;
             
             MemoryStream memoryStream = new MemoryStream();
@@ -67,7 +67,7 @@ namespace FileProcessorUnit.Tests
             };
 
             // Convert
-            FileDTO fileAsBinary = FileProcessor.TextToBinary(file1Dto);
+            FileDTO fileAsBinary = FileConvertors.TextToBinary(file1Dto);
 
 
             // Assert

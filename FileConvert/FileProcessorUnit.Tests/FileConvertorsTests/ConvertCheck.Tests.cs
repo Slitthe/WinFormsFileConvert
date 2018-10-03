@@ -42,8 +42,8 @@
 //            var file1ActualJson = convertedFilesList[0];
 //            var file2ActualBinary = convertedFilesList[1];
 
-//            var file1ExpectedJson = FileProcessor.TextFileToJson(convertedFilesList[0]);
-//            var file2ExpectedBinary = FileProcessor.TextToBinary(convertedFilesList[1]);
+//            var file1ExpectedJson = FileConvertors.TextFileToJson(convertedFilesList[0]);
+//            var file2ExpectedBinary = FileConvertors.TextToBinary(convertedFilesList[1]);
 
 //            bool jsonComparison = StructuralComparisons.StructuralEqualityComparer.Equals(file1ExpectedJson.Content, file1ActualJson.Content);
 
