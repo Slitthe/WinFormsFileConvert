@@ -26,7 +26,7 @@ namespace FileConvert
 
             InitDataGridViewTable();
             InitDialogSettings();
-            _fileUIActions = new FileUIActions(fileGridView);
+            _fileUIActions = new FileUiActions(fileGridView);
         }
         private void InitDialogSettings()
         {
@@ -98,7 +98,7 @@ namespace FileConvert
             List<DataGridViewRow> deletedRows = _fileUIActions.DeleteDataGridViewRows(checkedRows);
             
             
-            List<FileToConvertDTO> checkedFilesFromMemory = InMemoryFiles.GetMatchingFiles(deletedRows);
+            List<FileToConvertDto> checkedFilesFromMemory = InMemoryFiles.GetMatchingFiles(deletedRows);
 
             _fileUIActions.DeleteGridViewRowsFromMemory(deletedRows);
 
@@ -159,7 +159,7 @@ namespace FileConvert
         }
 
         private bool _overwriteExisting = true;
-        private readonly FileUIActions _fileUIActions;
+        private readonly FileUiActions _fileUIActions;
 
 
 

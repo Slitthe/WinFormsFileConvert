@@ -60,7 +60,7 @@
     <Compile Include="FileProcessorTests\TextFileToJson.Tests.cs" />
     <Compile Include="FileProcessorTests\SaveFiles.Tests.cs" />
     <Compile Include="FileProcessorTests\GetFileName.Tests.cs" />
-    <Compile Include="FileProcessorTests\FilePathsToFileDTO.Tests.cs" />
+    <Compile Include="FileProcessorTests\FilePathsToFileDto.Tests.cs" />
     <Compile Include="FileProcessorTests\GetFullFileName.Tests.cs" />
     <Compile Include="FileProcessorTests\GetFileExtension.Tests.cs" />
     <Compile Include="FileProcessorTests\FilesExistanceChecker.Tests.cs" />

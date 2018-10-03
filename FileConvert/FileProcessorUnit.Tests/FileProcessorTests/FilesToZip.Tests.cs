@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.IO.Compression;
 using System.IO;
+using FileConvert.Services;
 
 namespace FileProcessorUnit.Tests
 {
@@ -22,20 +23,20 @@ namespace FileProcessorUnit.Tests
             string file1AsString = "I am a string and nothing more";
             byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(file1AsString);
 
-            var file1Dto = new FileDTO()
+            var file1Dto = new FileDto()
             {
                 FileName = file1Name,
                 FileExtension = file1Extension,
                 Content = file1AsArrayOfBytes
             };
 
-            List<FileDTO> fileList = new List<FileDTO>() { file1Dto };
+            List<FileDto> fileList = new List<FileDto>() { file1Dto };
             string fullFileSavePath = $"{savePath}\\{zipName}.zip";
 
             // execute external test methods
-            FileDTO filesListToZip = FileConvertors.FilesToZip(fileList, zipName);
+            FileDto filesListToZip = FileConvertors.FilesToZip(fileList, zipName);
 
-            List<FileDTO> filesToSave = new List<FileDTO>()
+            List<FileDto> filesToSave = new List<FileDto>()
             {
                 filesListToZip
             };
@@ -74,20 +75,20 @@ namespace FileProcessorUnit.Tests
             string file1AsString = "I am a string and nothing more";
             byte[] file1AsArrayOfBytes = Encoding.Default.GetBytes(file1AsString);
 
-            var file1Dto = new FileDTO()
+            var file1Dto = new FileDto()
             {
                 FileName = file1Name,
                 FileExtension = file1Extension,
                 Content = file1AsArrayOfBytes
             };
 
-            List<FileDTO> fileList = new List<FileDTO>() { file1Dto };
+            List<FileDto> fileList = new List<FileDto>() { file1Dto };
             string fullFileSavePath = $"{savePath}\\{zipName}.zip";
 
             // execute external test methods
-            FileDTO filesListToZip = FileConvertors.FilesToZip(fileList, zipName);
+            FileDto filesListToZip = FileConvertors.FilesToZip(fileList, zipName);
 
-            List<FileDTO> filesToSave = new List<FileDTO>()
+            List<FileDto> filesToSave = new List<FileDto>()
             {
                 filesListToZip
             };

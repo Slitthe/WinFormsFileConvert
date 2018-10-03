@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileConvert.DTOs
 {
-    public class FileDTO
+    public class FileDto
     {
         public string FileExtension { get; set; }
         public string FileName { get; set; }

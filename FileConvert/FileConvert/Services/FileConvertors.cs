@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Newtonsoft.Json;
-using FileConvert.DTOs;
-using System.IO.Compression;
 using System.Text.RegularExpressions;
-using FileConvert.Services;
+using FileConvert.DTOs;
+using Newtonsoft.Json;
 
-namespace FileConvert
+namespace FileConvert.Services
 {
     public static class FileConvertors
     {
-        public static FileDTO ConvertFile(FileToConvertDTO file)
+        public static FileDto ConvertFile(FileToConvertDto file)
         {
-            FileDTO convertedFile = file.FileObj;
+            FileDto convertedFile = file.FileObj;
 
             //Action<string, string> runtTest = (x,y) => Test(x, y);
             //runtTest.Invoke("x", "y");
@@ -38,7 +35,7 @@ namespace FileConvert
 
 
 
-            FileDTO fileToAdd = file.FileObj;
+            FileDto fileToAdd = file.FileObj;
             switch (file.ConvertMode)
             {
                 case Enums.ConvertType.Json:
@@ -51,7 +48,7 @@ namespace FileConvert
 
             return convertedFile;
         }
-        public static FileDTO TextToBinary(FileDTO file)
+        public static FileDto TextToBinary(FileDto file)
         {
             var convertedFile = file;
 
@@ -65,7 +62,7 @@ namespace FileConvert
                 {
                     binWriter.Write(fileText);
 
-                    convertedFile = new FileDTO()
+                    convertedFile = new FileDto()
                     {
                         FileName = file.FileName,
                         FileExtension = "",
@@ -78,7 +75,7 @@ namespace FileConvert
             return convertedFile;
 
         }
-        public static FileDTO TextFileToJson(FileDTO file)
+        public static FileDto TextFileToJson(FileDto file)
         {
             var convertedFileDto = file;
 
@@ -86,7 +83,7 @@ namespace FileConvert
             {
                 string fileContentAsString = Encoding.Default.GetString(file.Content);
 
-                TextFileAsJsonDTO objectForJsonSerializer = new TextFileAsJsonDTO()
+                TextFileAsJsonDto objectForJsonSerializer = new TextFileAsJsonDto()
                 {
                     FileName = file.FileName,
                     FileExtension = file.FileExtension,
@@ -98,7 +95,7 @@ namespace FileConvert
                 byte[] jsonFileAsBytesArray = Encoding.Default.GetBytes(fileAsJson);
 
 
-                convertedFileDto = new FileDTO()
+                convertedFileDto = new FileDto()
                 {
                     FileName = file.FileName,
                     FileExtension = "json",
@@ -109,11 +106,11 @@ namespace FileConvert
 
             return convertedFileDto;
         }
-        public static FileDTO FilesToZip(IList<FileDTO> files, string zipName)
+        public static FileDto FilesToZip(IList<FileDto> files, string zipName)
         {
             byte[] fileZip = FileDtoListToZip(files);
 
-            FileDTO zipFile = new FileDTO
+            FileDto zipFile = new FileDto
             {
                 Content = fileZip,
                 FileName = zipName,
@@ -122,18 +119,35 @@ namespace FileConvert
             
             return zipFile;
         }
-        public static void SaveFiles(IList<FileDTO> files, string outputDirectoryPath, bool overwriteExisting)
-        {
+        public static FileDto FilePathsToFileDto(string fullFilePath)
 
-            foreach (var file in files)
+        {
+            var filePathList = new List<string>() { fullFilePath };
+            bool fileExists = FileNameHelpers.FilesExistenceChecker(filePathList);
+
+            FileDto fileDto = null;
+            if(fileExists)
+            {
+                fileDto = new FileDto();
+                fileDto.Content = File.ReadAllBytes(fullFilePath);
+                fileDto.FileExtension = FileNameHelpers.GetFileExtension(fullFilePath);
+                fileDto.FileName = FileNameHelpers.GetFileName(fullFilePath);
+
+            }
+            return fileDto;
+        }
+        public static void SaveFiles(IList<FileDto> files, string outputDirectoryPath, bool overwriteExisting)
+        {
+            var nonEmptyFiles = files.Where(file => file.Content.Length > 0);
+
+            foreach (var file in nonEmptyFiles)
             {
                 if( file != null )
                 {
                     string fullPath = $"{outputDirectoryPath}\\{file.FileName}.{file.FileExtension}";
                     
                     var fileInfo = new FileInfo(fullPath);
-
-                    // wtf logic?!
+                    
                     if(fileInfo.Exists)
                     {
                         if (overwriteExisting)
@@ -148,39 +162,15 @@ namespace FileConvert
                 }
             }
         }
-        public static void SaveFile(FileDTO file, string fileOutputFullPath)
+        public static void SaveFile(FileDto file, string fileOutputFullPath)
         {
-            File.WriteAllBytes(fileOutputFullPath, file.Content); 
-        }
-        public static FileDTO FilePathsToFileDTO(string fullFilePath)
-        {
-            var filePathList = new List<string>() { fullFilePath };
-            bool fileExists = FileNameHelpers.FilesExistenceChecker(filePathList);
-
-            FileDTO fileDto = null;
-            if(fileExists)
+            if (file.Content.Length > 0)
             {
-                fileDto = new FileDTO();
-                fileDto.Content = File.ReadAllBytes(fullFilePath);
-                fileDto.FileExtension = FileNameHelpers.GetFileExtension(fullFilePath);
-                fileDto.FileName = FileNameHelpers.GetFileName(fullFilePath);
-
+                File.WriteAllBytes(fileOutputFullPath, file.Content); 
             }
-            return fileDto;
         }
-        public static IList<FileDTO> FilePathsListToFileDTOList(IList<string> fullFilePaths)
-        {
-            IList<FileDTO> filesDTO = new List<FileDTO>();
 
-            foreach(string filePath in fullFilePaths)
-            {
-                FileDTO pathToFileDTO = FilePathsToFileDTO(filePath);
-                filesDTO.Add(pathToFileDTO);
-            }
-
-            return filesDTO;
-        }
-        private static byte[] FileDtoListToZip(IList<FileDTO> files)
+        private static byte[] FileDtoListToZip(IList<FileDto> files)
         {
             if (files.Count > 0)
             {
@@ -190,7 +180,7 @@ namespace FileConvert
 
                 using (var archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
                 {
-                    foreach (FileDTO file in files)
+                    foreach (FileDto file in files)
                     {
                         // add each file to archive
                         string fileName = file.FileName + '.' + file.FileExtension;
@@ -214,9 +204,5 @@ namespace FileConvert
             return null;
 
         }
-
-
-        
-        
     }
 }

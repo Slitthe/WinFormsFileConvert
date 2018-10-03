@@ -10,20 +10,20 @@ using FileConvert.Storage;
 
 namespace FileConvert.Services
 {
-    public class FileUIActions
+    public class FileUiActions
     {
         
 
-        public FileUIActions(DataGridView fileGridView)
+        public FileUiActions(DataGridView fileGridView)
         {
             _fileGridView = fileGridView;
         }
-        public IList<DataGridViewRow> DisplayFileDtoInDataGridView(IList<FileToConvertDTO> filesToDisplay)
+        public IList<DataGridViewRow> DisplayFileDtoInDataGridView(IList<FileToConvertDto> filesToDisplay)
         {
             var gridRows = _fileGridView.Rows;
             var addedRows = new List<DataGridViewRow>();
 
-            foreach (FileToConvertDTO fileToDisplay in filesToDisplay)
+            foreach (FileToConvertDto fileToDisplay in filesToDisplay)
             {
                 var fileObj = fileToDisplay.FileObj;
                 gridRows.Add(false, fileObj.FileName, fileObj.FileExtension);
@@ -52,7 +52,7 @@ namespace FileConvert.Services
 
             foreach (string filePath in filePaths)
             {
-                FileDTO file = FileConvertors.FilePathsToFileDTO(filePath);
+                FileDto file = FileConvertors.FilePathsToFileDto(filePath);
 
                 bool isUnique = IsUnique(file);
 
@@ -139,7 +139,7 @@ namespace FileConvert.Services
                 InMemoryFiles.RemoveSpecificFile(rowToDelete);
             }
         }
-        public List<FileToConvertDTO> UpdateInMemoryValuesToUiOnes(List<DataGridViewRow> rowsToUpdate)
+        public List<FileToConvertDto> UpdateInMemoryValuesToUiOnes(List<DataGridViewRow> rowsToUpdate)
         {
             foreach (DataGridViewRow row in rowsToUpdate)
             {
@@ -180,7 +180,7 @@ namespace FileConvert.Services
             // how you change the value of something
             //fileGridView.Rows[1].Cells[3].Value = ConvertType.Json;
         }
-        public bool IsUnique(FileDTO file)
+        public bool IsUnique(FileDto file)
         {
             var dictionaryFilesValues = InMemoryFiles.FilesDictionary.Values;
 
